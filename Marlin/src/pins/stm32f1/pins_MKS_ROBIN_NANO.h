@@ -50,7 +50,7 @@
 #define X_STOP_PIN                          PA15
 #define Y_STOP_PIN                          PA12
 #define Z_MIN_PIN                           PA11
-#define Z_MAX_PIN                           PC4
+//#define Z_MAX_PIN                           PC4
 
 #ifndef FIL_RUNOUT_PIN
   #define FIL_RUNOUT_PIN                    PA4   // MT_DET
@@ -75,9 +75,9 @@
 #define E0_STEP_PIN                         PD6
 #define E0_DIR_PIN                          PD3
 
-#define E1_ENABLE_PIN                       PA3
-#define E1_STEP_PIN                         PA6
-#define E1_DIR_PIN                          PA1
+//#define E1_ENABLE_PIN                       PA3
+//#define E1_STEP_PIN                         PA6
+//#define E1_DIR_PIN                          PA1
 
 //
 // Temperature Sensors
@@ -106,16 +106,59 @@
 //
 #define POWER_LOSS_PIN                      PA2   // PW_DET
 #define PS_ON_PIN                           PA3   // PW_OFF
-#define SUICIDE_PIN PB2     // Enable MKSPWC support
-#define KILL_PIN PA2     // Enable MKSPWC support
-#define KILL_PIN_INVERTING true     // Enable MKSPWC support
-#define SERVO0_PIN                          PA8   // Enable BLTOUCH support
-//#define LED_PIN                             PB2
+
+#define LED_PIN                             PB2
+
+#if HAS_TMC220x
+  /**
+   * TMC2208/TMC2209 stepper drivers
+   *
+   * Hardware serial communication ports.
+   * If undefined software serial is used according to the pins below
+   */
+  //#define X_HARDWARE_SERIAL  Serial1
+  //#define Y_HARDWARE_SERIAL  Serial1
+  //#define Z_HARDWARE_SERIAL  Serial1
+  //#define E0_HARDWARE_SERIAL Serial1
+  //#define E1_HARDWARE_SERIAL Serial1
+
+  //
+  // Software serial
+  //
+
+  #ifndef X_SERIAL_TX_PIN
+    #define X_SERIAL_TX_PIN  PA10 //RX_WiFi
+  #endif
+  #ifndef X_SERIAL_RX_PIN
+    #define X_SERIAL_RX_PIN  PA10 //RX_WiFi
+  #endif
+
+  #ifndef Y_SERIAL_TX_PIN
+    #define Y_SERIAL_TX_PIN  PA9 //TX_WiFi
+  #endif
+  #ifndef Y_SERIAL_RX_PIN
+    #define Y_SERIAL_RX_PIN  PA9 //TX_WiFi
+  #endif
+
+  #ifndef Z_SERIAL_TX_PIN
+    #define Z_SERIAL_TX_PIN  PC7 //IO1_WiFi
+  #endif
+  #ifndef Z_SERIAL_RX_PIN
+    #define Z_SERIAL_RX_PIN  PC7 //IO1_WiFi
+  #endif
+
+  #ifndef E0_SERIAL_TX_PIN
+    #define E0_SERIAL_TX_PIN PA5 //WiFi_CTRL
+  #endif
+  #ifndef E0_SERIAL_RX_PIN
+    #define E0_SERIAL_RX_PIN PA5 //WiFi_CTRL
+  #endif
+#endif
 
 //
 // SD Card
 //
-#define SDIO_SUPPORT
+//#define SDIO_SUPPORT
 #define SD_DETECT_PIN                       PD12
 
 //
